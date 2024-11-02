@@ -4,6 +4,8 @@ Welcome to the CS480 course notes! This repo is all you need to get started with
 
 Your contribution to make Machine Learning more accessible are welcomed! You could help create the **Helpers** which are designed to simplify complex topics.
 
+Feel free to star the repo ⭐️
+
 **Start Here!** 🚀
 
 
