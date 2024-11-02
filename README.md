@@ -23,7 +23,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
         <tr>
             <td><strong>00</strong></td>
             <td>Introduction</td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/00-intro/480-lec-intro.pdf">pdf</a></td>
             <td></td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/extras/optimization/480-note-opt.pdf">opt</a>, <a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/extras/stats/480-note-stat.pdf">stat</a></td>
             <td></td>
