@@ -1,0 +1,301 @@
+\documentclass[10pt]{article}
+\usepackage[left=1.5cm, right=1.5cm, top=0.8in, bottom=0.7in]{geometry} % lines=45, 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage}
+\usepackage[most,breakable]{tcolorbox}
+\usepackage{pdfcol,xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,chains}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+%\usepackage{url}
+\usepackage{dsfont}
+\usepackage{amssymb,amsmath}
+\usepackage{xspace}
+\usepackage[normalem]{ulem}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[breaklinks=true,colorlinks,linkcolor=magenta,urlcolor=magenta,citecolor=black]{hyperref}
+\usepackage{cleveref}
+\usepackage{xpatch}
+\xpretocmd{\algorithm}{\hsize=\linewidth}{}{}
+
+\newtcolorbox[auto counter]{exercise}[1][]{%
+	colback=yellow!10,colframe=red!75!black,coltitle=white,use color stack,enforce breakable,enhanced,fonttitle=\bfseries,before upper={\parindent15pt\noindent}, title={\color{white}Exercise~\thetcbcounter: #1}}
+\pagecolor{yellow!10}
+
+\lhead{\textbf{University of Waterloo}}
+\rhead{\textbf{2024 Spring}}
+\chead{\textbf{CS480/680}}
+\rfoot{\thepage/\pageref*{LastPage}}
+\cfoot{\textbf{Yao-Liang Yu (yaoliang.yu@uwaterloo.ca) \textcopyright 2024}}
+
+\newcommand{\pf}{\mathfrak{p}}
+\newcommand{\qf}{\mathfrak{q}}
+\newcommand{\pb}{\bar{p}}
+\newcommand{\qb}{\bar{q}}
+\newcommand{\pfb}{\bar{\mathfrak{p}}}
+\newcommand{\qfb}{\bar{\mathfrak{q}}}
+\newcommand{\rK}{\reflectbox{\ensuremath{K}}}
+
+\newcommand{\bv}{\mathbf{b}}
+\newcommand{\fv}{\mathbf{f}}
+\newcommand{\gv}{\mathbf{g}}
+\newcommand{\rv}{\mathbf{r}}
+\newcommand{\wv}{\mathbf{w}}
+\newcommand{\xv}{\mathbf{x}}
+\newcommand{\yv}{\mathbf{y}}
+\newcommand{\zv}{\mathbf{z}}
+\newcommand{\gbs}{\bm{\mathsf{g}}}
+\newcommand{\wbs}{\bm{\mathsf{w}}}
+\newcommand{\xbs}{\bm{\mathsf{x}}}
+\newcommand{\Xv}{\mathbf{X}}
+\newcommand{\Yv}{\mathbf{Y}}
+\newcommand{\Bsf}{\mathsf{B}}
+\newcommand{\Lsf}{\mathsf{L}}
+\newcommand{\Xsf}{\mathsf{X}}
+\newcommand{\Ysf}{\mathsf{Y}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\EE}{\mathds{E}}
+\newcommand{\RR}{\mathds{R}}
+\newcommand{\epsilonv}{\boldsymbol{\epsilon}}
+
+\newcommand{\ans}[1]{{\color{blue}\textsf{Ans}: #1}}
+\newcommand{\argmin}{\mathop{\mathrm{argmin}}}
+\newcommand{\argmax}{\mathop{\mathrm{argmax}}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\dinner}[2]{\langle\!\langle#1,#2\rangle\!\rangle}
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\pred}[1]{[\![#1]\!]}
+\newcommand{\prox}[1]{\mathrm{P}_{#1}}
+\newcommand{\sgm}{\mathsf{sgm}}
+\newcommand{\sign}{\mathop{\mathrm{sign}}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\zero}{\mathbf{0}}
+
+\newcommand{\ea}{{et al.}\xspace}
+\newcommand{\eg}{{e.g.}\xspace}
+\newcommand{\ie}{{i.e.}\xspace}
+\newcommand{\iid}{{i.i.d.}\xspace}
+\newcommand{\cf}{{cf.}\xspace}
+\newcommand{\wrt}{{w.r.t.}\xspace}
+\newcommand{\aka}{{a.k.a.}\xspace}
+\newcommand{\etc}{{etc.}\xspace}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+\newcommand{\magenta}[1]{{\color{magenta}#1}}
+\newcommand{\green}[1]{{\color{green}#1}}
+%===========================================================
+\begin{document}
+	
+	\begin{center}
+		\large{\textbf{CS480/680: Introduction to Machine Learning} \\ Homework 2\\ \red{Due: 11:59 pm, June 17, 2024}, \red{submit on LEARN}.} \\
+		
+		{\bf \green{NAME}} \\
+		{\bf \green{student number}}
+		
+	\end{center}
+	
+	\begin{center}
+		Submit your writeup in pdf and all source code in a zip file (with proper documentation). Write a script for each programming exercise so that the TA can easily run and verify your results. Make sure your code runs!
+		
+		[Text in square brackets are hints that can be ignored.]
+	\end{center}
+
+	\begin{exercise}[Graph Kernels (6 pts)]
+		One cool way to construct a new kernel from an existing set of (base) kernels is through graphs. Let $\mathcal{G} = (V, E)$ be a directed acyclic graph (DAG), where $V$ denotes the nodes and $E$ denotes the arcs (directed edges). For convenience let us assume there is a source node $s$ that has no incoming arc and there is a sink node $t$ that has no outgoing arc. We put a base kernel $\kappa_e$ (that is, a function $\kappa_e: \mathcal{X} \times \mathcal{X} \to \mathds{R}$) on each arc $e = (u \to v) \in E$. For each path $P = (u_0 \to u_1 \to \cdots \to u_d)$ with $u_{i-1} \to u_i$ being an arc in $E$, we can define the kernel for the path $P$ as the product of kernels along the path:
+		\begin{align}
+		\forall \xv, \zv \in \mathcal{X},~
+		\kappa_P(\xv, \zv) = \prod_{i=1}^d \kappa_{u_{i-1}\to u_i} (\xv, \zv).
+		\end{align}
+		Then, we define the kernel for the graph $\mathcal{G}$ as the sum of all possible $s\to t$ \emph{path kernels}:
+		\begin{align}
+		\forall \xv, \zv \in \mathcal{X},~
+		\kappa_{\mathcal{G}}(\xv, \zv) = \sum_{P \in \mathrm{path}(s \to t)} \kappa_P(\xv, \zv).
+		\end{align}
+		
+		\begin{enumerate}
+			\item (1 pt) \uline{Prove} that $\kappa_{\mathcal{G}}$ is indeed a kernel. [You may use any property that we learned in class about kernels.]
+			
+			\ans{\vskip5cm}
+			
+			\item (2 pts) Let $\kappa_i, i = 1, \ldots, n$ be a set of given kernels. \uline{Construct} a graph $\mathcal{G}$ (with appropriate base kernels) so that the graph kernel $\kappa_{\mathcal{G}} = \sum_{i=1}^n \kappa_i$. Similarly, \uline{construct} a graph $\mathcal{G}$ (with appropriate base kernels) so that the graph kernel $\kappa_{\mathcal{G}} = \prod_{i=1}^n \kappa_i$. 
+		
+			\ans{\vskip5cm}
+
+			\item (1 pt) Consider the subgragh of the figure below that includes nodes $s, a, b, c$ (and arcs connecting them). \uline{Compute} the graph kernel where $s$ and $c$ play the role of source and sink, respectively. \uline{Repeat the computation} with the subgraph that includes $s, a, b, c, d$ (and arcs connecting them), where $d$ is the sink now.
+			
+			\begin{center}
+				\begin{tikzpicture}[auto]
+						\tikzset{align=center,font=\small}
+						
+						\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+						
+						\tikzset{edge/.style = {-,> = latex'}}
+						
+						% vertices
+						
+						\node[vertex] (s) at  (0,0) {s};
+						
+						\node[vertex] (a) at  (2,0) {a};
+						
+						\node[vertex] (b) at  (4.5,0) {b};
+						
+						\node[vertex] (c) at  (6,0) {c};
+						
+						\node[vertex] (d) at  (10,0) {d};
+						
+						\node[vertex] (t) at  (12,0) {t};
+						%edges
+						
+						\begin{scope}[every edge/.style={draw=black,->,> = latex}]
+						\draw[edge] (s) edge node{$xz$}  (a);
+						\draw[edge] (a) edge node[below] {$e^{-(x-z)^2}$}  (b);
+						\draw[edge] [bend left] (a) edge node {$(xz-1)^2$}  (c);
+						\draw[edge] [bend right] (b) edge node[below]{$\tanh(xz+1)$}  (d);
+						\draw[edge] (c) edge node{$e^{-|x-z|/2}$}  (d);
+						\draw[edge] (d) edge node{1}  (t);
+						\end{scope}
+				\end{tikzpicture}
+			\end{center}
+
+			\ans{\vskip3cm}
+			
+			\item (2 pts) \uline{Find an efficient algorithm to compute the graph kernel} $\kappa_{\mathcal{G}}(\xv, \zv)$ (for two fixed inputs $\xv$ and $\zv$) in time $O(|V| + |E|)$, assuming each base kernel $\kappa_e$ costs $O(1)$ to evaluate. You may assume there is always at least one $s-t$ path. State and justify your algorithm is enough; no need (although you are encouraged) to give a full pseudocode. 
+			
+			[Note that the total number of paths in a DAG can be exponential in terms of the number of nodes $|V|$, so naive enumeration would not work. For example, replicating the intermediate nodes in the above figure $n$ times creates $2^n$ paths from $s$ to $t$.]
+			
+			[Hint: Recall that we can use \href{https://en.wikipedia.org/wiki/Topological_sorting}{topological sorting} to rearrange the nodes in a DAG such that all arcs go from a ``smaller'' node to a ``bigger'' one.]
+			
+			\ans{\vskip5cm}
+		\end{enumerate}
+	\end{exercise}
+
+
+	\begin{exercise}[CNN Implementation (8 pts)]
+		\blue{\textbf{Note}: Please mention your Python version (and maybe the version of all other packages).}
+		
+		In this exercise you are going to run some experiments involving CNNs. You need to know \href{https://www.python.org/}{\magenta{Python}} and install the following libraries: \href{https://pytorch.org/get-started/locally/}{\magenta{Pytorch}}, \href{https://matplotlib.org/}{\magenta{matplotlib}} and all their dependencies. You can find detailed instructions and tutorials for each of these libraries on the respective websites. 
+	
+		For all experiments, running on CPU is sufficient. You do not need to run the code on GPUs, although you could, using for instance \href{https://colab.research.google.com/}{Google Colab}.
+		Before start, we suggest you review what we learned about each layer in CNN, and read at least this \href{https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html}{\magenta{tutorial}}.
+	
+		\begin{enumerate}
+			\item Implement and train a VGG11 net on the \href{https://pytorch.org/vision/stable/datasets.html#mnist}{\magenta{MNIST}} dataset. 
+			VGG11 was an earlier version of VGG16 and can be found as model A in Table 1 of this \href{https://arxiv.org/pdf/1409.1556.pdf}{\magenta{paper}}, whose Section 2.1 also gives you all the details about each layer.
+			The goal is to get the loss as close to 0 as possible. Note that our input dimension is different from the VGG paper. You need to resize each image in MNIST from its original size $28 \times 28$ to $32 \times 32$ [why?].
+	
+			For your convenience, we list the details of the VGG11 architecture here.
+			The convolutional layers are denoted as \texttt{Conv(number of input channels, number of output channels, kernel size, stride, padding)};
+			the batch normalization layers  are denoted as \texttt{BatchNorm(number of channels)};
+			the max-pooling layers are denoted as \texttt{MaxPool(kernel size, stride)};
+			the fully-connected layers are denoted as \texttt{FC(number of input features, number of output features)};
+			the drop out layers are denoted as \texttt{Dropout(dropout ratio)}:
+			\begin{verbatim}
+			- Conv(001, 064, 3, 1, 1) - BatchNorm(064) - ReLU - MaxPool(2, 2)
+			- Conv(064, 128, 3, 1, 1) - BatchNorm(128) - ReLU - MaxPool(2, 2)
+			- Conv(128, 256, 3, 1, 1) - BatchNorm(256) - ReLU 
+			- Conv(256, 256, 3, 1, 1) - BatchNorm(256) - ReLU - MaxPool(2, 2)
+			- Conv(256, 512, 3, 1, 1) - BatchNorm(512) - ReLU 
+			- Conv(512, 512, 3, 1, 1) - BatchNorm(512) - ReLU - MaxPool(2, 2)
+			- Conv(512, 512, 3, 1, 1) - BatchNorm(512) - ReLU 
+			- Conv(512, 512, 3, 1, 1) - BatchNorm(512) - ReLU - MaxPool(2, 2)
+			- FC(0512, 4096) - ReLU - Dropout(0.5) 
+			- FC(4096, 4096) - ReLU - Dropout(0.5) 
+			- FC(4096, 10)
+			\end{verbatim}
+			You should use the \href{https://pytorch.org/docs/master/generated/torch.nn.CrossEntropyLoss.html}{cross-entropy loss} \verb|torch.nn.CrossEntropyLoss| at the end.
+				
+			[This experiment will take up to 1 hour on a CPU, so please be cautious of your time. If this running time is not bearable, you may cut the training set to 1/10, so only have $\sim$600 images per class instead of the regular $\sim$6000.]
+			
+			\item (4 pts) Once you've done the above, the next goal is to inspect the training process. \uline{Create the following plots}:
+			\begin{enumerate}
+				\item (1 pt) test accuracy vs the number of epochs (say 3 $\sim$ 5)
+				\item (1 pt) training accuracy vs the number of epochs
+				\item (1 pt) test loss vs the number of epochs
+				\item (1 pt) training loss vs the number of epochs
+			\end{enumerate}
+			[If running more than 1 epoch is computationally infeasible, simply run 1 epoch and try to record the accuracy/loss after every few minibatches.]
+			
+			\ans{%
+			\begin{center}
+				\includegraphics[width=.4\textwidth]{example-image-a}\includegraphics[width=.4\textwidth]{example-image-b}\\
+					\includegraphics[width=.4\textwidth]{example-image-c}\includegraphics[width=.4\textwidth]{example-image-a}\\
+			\end{center}
+			}
+			
+			\item Then, it is time to inspect the generalization properties of your final model. Flip and blur the \red{test set images} using any python library of your choice, and complete the following:		
+			\begin{enumerate}[resume]
+				\item (1 pt) test accuracy vs type of flip. Try the following two types of flipping: flip each image from left to right, and from top to bottom. \uline{Report the test accuracy after each flip. What is the effect?}
+				
+				You can read this \href{https://pytorch.org/vision/stable/transforms.html}{\magenta{doc}} to learn how to build a complex transformation pipeline. We suggest the following command for performing flipping: 
+				\begin{verbatim}
+				torchvision.transforms.RandomHorizontalFlip(p=1)
+				torchvision.transforms.RandomVerticalFlip(p=1)
+				\end{verbatim}
+				
+				\ans{We can see that 
+				\begin{center}
+				\includegraphics[width=.5\textwidth]{example-image-a}
+				\end{center}
+				}
+						
+				\item (1 pt) test accuracy vs Gaussian noise. Try adding standard Gaussian noise to each test image with variance 0.01, 0.1, 1 and \uline{report the test accuracies. What is the effect?}
+				
+				For instance, you may apply a user-defined lambda as a new transform t which adds Gaussian noise with variance say 0.01: 
+				\begin{verbatim}
+				t = torchvision.transforms.Lambda(lambda x : x + 0.1*torch.randn_like(x))
+				\end{verbatim}
+				
+				\ans{We can see that
+				\begin{center}
+				\includegraphics[width=.5\textwidth]{example-image-b}
+				\end{center}
+				}			
+			\end{enumerate} 
+			
+			\item (2 pts) Lastly, let us verify the effect of regularization. Retrain your model with data augmentation and test again as in item~3 above (both e and f). \uline{Report the test accuracy and explain} what kind of data augmentation you use in retraining.
+			
+				\ans{We can see that
+				\begin{center}
+				\includegraphics[width=.4\textwidth]{example-image-a}	\includegraphics[width=.4\textwidth]{example-image-b}
+				\end{center}
+				}		
+		\end{enumerate}
+	\end{exercise}
+
+
+	\begin{exercise}[Regularization (4 pts)]
+		\blue{\textbf{Notation}: For the vector $\xv_i$, we use $x_{ji}$ to denote its $j$-th element.}
+		
+		Overfitting to the training set is a big concern in machine learning. One simple remedy is through injecting noise: we randomly perturb each training data before feeding it into our machine learning algorithm. In this exercise you are going to prove that injecting noise to training data is essentially the same as adding some particular form of regularization. We use least-squares regression as an example, but the same idea extends to other models in machine learning almost effortlessly.
+		
+		Recall that least-squares regression aims at solving:
+		\begin{align}
+		\label{eq:lr}
+		\min_{\wv\in \RR^d} ~ \sum_{i=1}^n (y_i - \wv^\top\xv_i )^2,
+		\end{align}
+		where $\xv_i \in \RR^d$ and $y_i \in \RR$ are the training data. (For simplicity, we omit the bias term here.) Now, instead of using the given feature vector $\xv_i$, we perturb it first by some independent noise $\epsilonv_i$ to get $\tilde{\xv}_i = f(\xv_i, \epsilonv_i)$, with different choices of the perturbation function $f$. Then, we solve the following \textbf{expected} least-squares regression problem:
+		\begin{align}
+		\label{eq:plr}
+		\min_{\wv\in \RR^d} ~ \sum_{i=1}^n \mathbf{E}[(y_i - \wv^\top\tilde\xv_i )^2],
+		\end{align}
+		where the expectation removes the randomness in $\tilde \xv_i$ (due to the noise $\epsilonv_i$), and we treat $\xv_i, y_i$ as fixed here. [To understand the expectation, think of $n$ as so large that we have each data appearing repeatedly many times in our training set.]
+		
+		\begin{enumerate}
+			\item (2 pts) Let $\tilde{\xv}_i = f(\xv_i, \epsilonv_i) = \xv_i + \epsilonv_i$ where $\epsilonv_i \sim \mathcal{N}(\zero, \lambda I)$ follows the standard Gaussian distribution. Simplify \eqref{eq:plr} as the usual least-squares regression \eqref{eq:lr}, plus a familiar regularization function on $\wv$.
+			
+			\ans{\vskip5cm
+			}
+				
+			\item (2 pts) Let $\tilde{\xv}_i = f(\xv_i, \epsilonv_i) = \xv_i \odot \epsilonv_i$, where $\odot$ denotes the element-wise product and $p \epsilon_{ji} \sim \href{https://en.wikipedia.org/wiki/Bernoulli_distribution}{\magenta{\mathrm{Bernoulli}}}(p)$ \href{https://en.wikipedia.org/wiki/Independence_(probability_theory)}{\magenta{independently}} for each $j$. That is, with probability $1-p$ we reset $x_{ji} $ to 0 and with probability $p$ we scale $x_{ji}$ as $x_{ji}/p$. Note that for different training data $\xv_i$, $\epsilonv_i$'s are independent. Simplify \eqref{eq:plr} as the usual least-squares regression \eqref{eq:lr}, plus a different regularization function on $\wv$ (that may also depend on $\xv$). [This way of injecting noise, when applied to the weight vector $\wv$ in a neural network, is known as Dropout (DropConnect).]
+	
+		    \ans{\vskip8cm} 		
+		\end{enumerate}
+	\end{exercise}
+\end{document}
+              
