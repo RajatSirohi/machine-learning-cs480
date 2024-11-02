@@ -235,6 +235,9 @@ Some of the topics might seem dense at first, but that's where the `.ipynb` note
 
 - [ ] Add helpers notebook for the Attention lectures 10 upwards, especially the Attention/Transformers lecture (10)
 - [ ] Add solutions to assignments
+- [ ] Add my personal notes if the community wants
+- [ ] Add useful videos to the sections
+- [ ] Add more math stuff (matrix calculus, gaussian space, etc...)
 
 
 ### Why This Repo?
