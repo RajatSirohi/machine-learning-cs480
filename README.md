@@ -72,7 +72,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">❌</a></td>
+            <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/04-svm/svm.ipynb">pdf</a></td>
         </tr>
         <tr>
             <td><strong>06</strong></td>
