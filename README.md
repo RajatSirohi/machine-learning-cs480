@@ -25,7 +25,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td>Introduction</td>
             <td><a href="#">pdf</a></td>
             <td></td>
-            <td><a href="#">opt</a>, <a href="#">stat</a></td>
+            <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/extras/optimization/480-note-opt.pdf">opt</a>, <a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/extras/stats/480-note-stat.pdf">stat</a></td>
             <td></td>
             <td><a href="#">pdf</a></td>
         </tr>
@@ -34,7 +34,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td>Perceptron</td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/01-perceptron/480-lec-per.pdf">pdf</a></td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/01-perceptron/480-note-per.pdf">pdf</a></td>
-            <td><a href="#">winnow</a></td>
+            <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/extras/winnow/480-note-winnow.pdf">winnow</a></td>
             <td></td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/01-perceptron/perceptron.ipynb">pdf</a></td>
         </tr>
