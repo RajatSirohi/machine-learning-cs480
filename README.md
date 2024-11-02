@@ -72,7 +72,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>06</strong></td>
@@ -81,7 +81,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/asignments/a2/a2.pdf">pdf, tex (SS)</a></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>07</strong></td>
@@ -90,7 +90,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td><a href="#">pdf</a></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>08</strong></td>
@@ -99,7 +99,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>09</strong></td>
@@ -108,7 +108,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/08-attention/480-note-att.pdf">pdf</a></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>10</strong></td>
@@ -117,7 +117,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/09-gnn/480-lec-gnn.pdf">pdf</a></td>
             <td></td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/asignments/a3/a3.pdf">pdf, tex (HL)</a></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>11</strong></td>
@@ -126,7 +126,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>12</strong></td>
@@ -135,7 +135,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/11-boosting/480-note-ens.pdf">pdf</a></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>13</strong></td>
@@ -144,7 +144,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/12-gans/480-note-gan.pdf">pdf</a></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>14</strong></td>
@@ -153,7 +153,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>15</strong></td>
@@ -162,7 +162,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td><a href="https://github.com/jadechoghari/machine-learning-cs480/blob/main/asignments/a4/a4.pdf">pdf, tex (YL)</a></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>16</strong></td>
@@ -171,7 +171,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>17</strong></td>
@@ -180,7 +180,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>18</strong></td>
@@ -189,7 +189,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>19</strong></td>
@@ -198,7 +198,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>20</strong></td>
@@ -207,7 +207,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
         <tr>
             <td><strong>21</strong></td>
@@ -216,7 +216,7 @@ Your contribution to make Machine Learning more accessible are welcomed! You cou
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="#">pdf</a></td>
+            <td><a href="#">❌</a></td>
         </tr>
     </tbody>
 </table>
